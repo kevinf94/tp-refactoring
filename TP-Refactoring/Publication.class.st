@@ -28,18 +28,12 @@ Publication >> initialize [
 
 { #category : #accessing }
 Publication >> negativeVotes [
-	| r |
-	r := OrderedCollection new.
-	votes do:[:vote | vote isLike ifFalse:[r add: vote]].
-	^r
+	^votes reject: [ :aVote | aVote isLike ]
 ]
 
 { #category : #accessing }
 Publication >> positiveVotes [
-	| r |
-	r := OrderedCollection new.
-	votes do:[:vote | vote isLike ifTrue:[r add: vote]].
-	^r
+	^votes select: [ :aVote | aVote isLike ]
 ]
 
 { #category : #accessing }

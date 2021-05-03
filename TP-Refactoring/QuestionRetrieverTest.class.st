@@ -59,7 +59,7 @@ QuestionRetrieverTest >> popularTodayFourLikesFourQuestionsAtLeastOneVote [
 { #category : #testing }
 QuestionRetrieverTest >> popularTodayFourQuestionsAtLeastOneVote [
 	"1 likes / 4 preguntas // preguntas con al menos 1 voto"
-	question2User3TopicOO2 := Question newWithTitle: 'Which refactoring should...' description: '' user: user3 topic: topicOO2.
+	question2User3TopicOO2 := Question withTitle: 'Which refactoring should...' description: '' user: user3 topic: topicOO2.
 	cuoora addQuestion: question2User3TopicOO2 forUser: user3.
 	self assert: (popularTodayRetriever retrieveQuestions: user1) size equals: 1.
 	self assert: (popularTodayRetriever retrieveQuestions: user2) size equals: 0.
@@ -69,7 +69,7 @@ QuestionRetrieverTest >> popularTodayFourQuestionsAtLeastOneVote [
 { #category : #testing }
 QuestionRetrieverTest >> popularTodayNoLikesThreeQuestions [
 	"0 likes / 3 preguntas "
-	questionUser2TopicOO2 := Question newWithTitle: 'Which bad smell...?' description: '' user: user2 topic: topicOO2.
+	questionUser2TopicOO2 := Question withTitle: 'Which bad smell...?' description: '' user: user2 topic: topicOO2.
 	cuoora addQuestion: questionUser2TopicOO2 forUser: user2.
 	self assert: (popularTodayRetriever retrieveQuestions: user1) size equals: 2.
 	self assert: (popularTodayRetriever retrieveQuestions: user2) size equals: 2.
@@ -121,8 +121,8 @@ QuestionRetrieverTest >> setUp [
 	cuoora := CuOOra new.
 	cuoora addUser: user1; addUser: user2; addUser: user3.
 	
-	questionUser1TopicOO1 := Question newWithTitle: 'How to create a class in Pharo' description: '' user: user1 topic: topicOO1.
-	questionUser3TopicOO2 := Question newWithTitle: 'How to create a WAComponent for...' description: '' user: user3 topic: topicOO2.
+	questionUser1TopicOO1 := Question withTitle: 'How to create a class in Pharo' description: '' user: user1 topic: topicOO1.
+	questionUser3TopicOO2 := Question withTitle: 'How to create a WAComponent for...' description: '' user: user3 topic: topicOO2.
 	
 	cuoora addQuestion: questionUser1TopicOO1 forUser:user1.
 	cuoora addQuestion: questionUser3TopicOO2 forUser:user3.
@@ -143,7 +143,7 @@ QuestionRetrieverTest >> testNewsRetrieveQuestions [
 	self assert: (newsRetriever retrieveQuestions: user3) last equals: questionUser1TopicOO1.
 	
 	questionUser2TopicOO2 := Question
-		newWithTitle: 'Which bad smell...?'
+		withTitle: 'Which bad smell...?'
 		description: ''
 		user: user2
 		topic: topicOO2.
@@ -176,7 +176,7 @@ QuestionRetrieverTest >> testSocialRetrieveQuestions [
 	self assert: (socialRetriever retrieveQuestions: user2) size equals: 0.
 	self assert: (socialRetriever retrieveQuestions: user3) size equals: 0.
 	
-	questionUser2TopicOO2 := Question newWithTitle: 'Which bad smell...?' description: '' user: user2 topic: topicOO2.
+	questionUser2TopicOO2 := Question withTitle: 'Which bad smell...?' description: '' user: user2 topic: topicOO2.
 	questionUser2TopicOO2 addVote: (Vote user: user2 dislikesPublication: questionUser2TopicOO2).
 	cuoora addQuestion: questionUser2TopicOO2 forUser:user2.
 	
@@ -197,7 +197,7 @@ QuestionRetrieverTest >> testTopicsRetrieveQuestions [
   self assert: (topicsRetriever retrieveQuestions: user1) size equals: 0.
   self assert: (topicsRetriever retrieveQuestions: user2) size equals: 1.
   self assert: (topicsRetriever retrieveQuestions: user3) size equals: 0.
-  questionUser2TopicOO2 := Question newWithTitle: 'Which bad smell...?' description: '' user: user2 topic: topicOO2.
+  questionUser2TopicOO2 := Question withTitle: 'Which bad smell...?' description: '' user: user2 topic: topicOO2.
   cuoora addQuestion: questionUser2TopicOO2 forUser: user2.
   self assert: (topicsRetriever retrieveQuestions: user2) size equals: 1.
   self assert: (topicsRetriever retrieveQuestions: user3) size equals: 1.

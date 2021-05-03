@@ -8,8 +8,8 @@ Class {
 }
 
 { #category : #'instance creation' }
-Answer class >> new: anAnswer user: aUser question: aQuestion [
-	^self new withAnswer: anAnswer user: aUser question: aQuestion
+Answer class >> withDescription: aDescriptionString user: aUser question: aQuestion [
+	^self new withDescription: aDescriptionString user: aUser question: aQuestion
 ]
 
 { #category : #initialize }
@@ -24,7 +24,7 @@ Answer >> isTopAnswer [
 ]
 
 { #category : #private }
-Answer >> withAnswer: anAnswer user: aUser question: aQuestion [
-	self withDescription: anAnswer user: aUser.
+Answer >> withDescription: aDescriptionString user: aUser question: aQuestion [
+	self withDescription: aDescriptionString user: aUser.
 	question := aQuestion.
 ]

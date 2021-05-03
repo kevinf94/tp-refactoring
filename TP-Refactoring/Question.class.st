@@ -10,13 +10,13 @@ Class {
 }
 
 { #category : #'instance creation' }
-Question class >> newWithTitle: aTitle description: aDescription user: aUser [
-	^self new withTitle: aTitle description: aDescription user: aUser; yourself.
+Question class >> withTitle: aTitleString description: aDescriptionString user: aUser [
+	^self new withTitle: aTitleString description: aDescriptionString user: aUser; yourself.
 ]
 
 { #category : #'instance creation' }
-Question class >> newWithTitle: aTitle description: aDescription user: aUser topic: aTopic [
-	^self new withTitle: aTitle description: aDescription user: aUser topic: aTopic; yourself.
+Question class >> withTitle: aTitleString description: aDescriptionString user: aUser topic: aTopic [
+	^self new withTitle: aTitleString description: aDescriptionString user: aUser topic: aTopic; yourself.
 ]
 
 { #category : #adding }
@@ -39,11 +39,6 @@ Question >> title [
 ]
 
 { #category : #accessing }
-Question >> title: aTitle [
-	title := aTitle 
-]
-
-{ #category : #accessing }
 Question >> topics [
 	^topics 
 ]
@@ -59,6 +54,5 @@ Question >> withTitle: aTitle description: aDescription user: aUser [
 Question >> withTitle: aTitle description: aDescription user: aUser topic: aTopic [
 	self withDescription: aDescription user: aUser.
 	title := aTitle.
-	"topics := aTopic."
 	self addTopic: aTopic.
 ]
