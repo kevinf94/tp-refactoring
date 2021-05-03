@@ -10,22 +10,13 @@ Class {
 }
 
 { #category : #'instance creation' }
-Question class >> newWithTitle: title description: aDescription user: aUser [
-	^ self new
-		title: title;
-		description: aDescription;
-		user: aUser;
-		yourself.
+Question class >> newWithTitle: aTitle description: aDescription user: aUser [
+	^self new withTitle: aTitle description: aDescription user: aUser; yourself.
 ]
 
 { #category : #'instance creation' }
-Question class >> newWithTitle: title description: aDescription user: aUser topic: aTopic [
-	^ self new
-		title: title;
-		description: aDescription;
-		addTopic: aTopic;
-		user: aUser;
-		yourself.
+Question class >> newWithTitle: aTitle description: aDescription user: aUser topic: aTopic [
+	^self new withTitle: aTitle description: aDescription user: aUser topic: aTopic; yourself.
 ]
 
 { #category : #adding }
@@ -34,12 +25,12 @@ Question >> addTopic: aTopic [
 	aTopic addQuestion: self.
 ]
 
-{ #category : #'initalize-release' }
+{ #category : #initialize }
 Question >> initialize [
+	super initialize.
 	answers := OrderedCollection new.
 	topics := OrderedCollection new.
-	votes := OrderedCollection new.
-	timestamp := DateAndTime now.
+
 ]
 
 { #category : #accessing }
@@ -55,4 +46,19 @@ Question >> title: aTitle [
 { #category : #accessing }
 Question >> topics [
 	^topics 
+]
+
+{ #category : #private }
+Question >> withTitle: aTitle description: aDescription user: aUser [
+	self withDescription: aDescription user: aUser.
+	title := aTitle.
+
+]
+
+{ #category : #private }
+Question >> withTitle: aTitle description: aDescription user: aUser topic: aTopic [
+	self withDescription: aDescription user: aUser.
+	title := aTitle.
+	"topics := aTopic."
+	self addTopic: aTopic.
 ]

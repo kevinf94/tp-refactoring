@@ -20,17 +20,13 @@ Publication >> description [
 	^ description
 ]
 
-{ #category : #private }
-Publication >> description: anObject [
-	description := anObject
-]
-
 { #category : #initialization }
 Publication >> initialize [
-	""
+	votes := OrderedCollection new.
+	timestamp := DateAndTime now.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 Publication >> negativeVotes [
 	| r |
 	r := OrderedCollection new.
@@ -38,7 +34,7 @@ Publication >> negativeVotes [
 	^r
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 Publication >> positiveVotes [
 	| r |
 	r := OrderedCollection new.
@@ -51,22 +47,18 @@ Publication >> timestamp [
 	^ timestamp
 ]
 
-{ #category : #private }
-Publication >> timestamp: anObject [
-	timestamp := anObject
-]
-
 { #category : #accessing }
 Publication >> user [
 	^ user
 ]
 
-{ #category : #private }
-Publication >> user: anObject [
-	user := anObject
-]
-
 { #category : #accessing }
 Publication >> votes [
 	^ votes
+]
+
+{ #category : #private }
+Publication >> withDescription: aDescriptionString user: aUser [
+	description := aDescriptionString.
+	user := aUser.
 ]

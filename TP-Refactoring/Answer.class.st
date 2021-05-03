@@ -9,17 +9,12 @@ Class {
 
 { #category : #'instance creation' }
 Answer class >> new: anAnswer user: aUser question: aQuestion [
-	^ self new
-		description: anAnswer;
-		user: aUser;
-		question: aQuestion;
-		yourself
+	^self new withAnswer: anAnswer user: aUser question: aQuestion
 ]
 
 { #category : #initialize }
 Answer >> initialize [
-	votes := OrderedCollection new.
-	timestamp := DateAndTime now.
+	super initialize.
 ]
 
 { #category : #accessing }
@@ -29,6 +24,7 @@ Answer >> isTopAnswer [
 ]
 
 { #category : #private }
-Answer >> question: aQuestion [
-	question := aQuestion 
+Answer >> withAnswer: anAnswer user: aUser question: aQuestion [
+	self withDescription: anAnswer user: aUser.
+	question := aQuestion.
 ]
