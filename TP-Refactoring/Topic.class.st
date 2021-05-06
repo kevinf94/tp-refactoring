@@ -10,11 +10,8 @@ Class {
 }
 
 { #category : #'intance creation' }
-Topic class >> name: aName description: aDescription [
-	^ self new
-		name: aName;
-		description: aDescription;
-		yourself
+Topic class >> withName: aNameString description: aDescriptionString [
+	^ self new withName: aNameString description: aDescriptionString; yourself
 ]
 
 { #category : #accessing }
@@ -27,9 +24,9 @@ Topic >> description [
 	^ description
 ]
 
-{ #category : #accessing }
-Topic >> description: anObject [
-	description := anObject
+{ #category : #private }
+Topic >> description: aDescriptionString [
+	description := aDescriptionString
 ]
 
 { #category : #initialize }
@@ -42,12 +39,18 @@ Topic >> name [
 	^name
 ]
 
-{ #category : #accessing }
-Topic >> name: anObject [
-	name := anObject
+{ #category : #private }
+Topic >> name: aNameString [
+	name := aNameString
 ]
 
 { #category : #accessing }
 Topic >> questions [
 	^ questions
+]
+
+{ #category : #private }
+Topic >> withName: aNameString description: aDescriptionString [
+	name := aNameString.
+	description := aDescriptionString.
 ]

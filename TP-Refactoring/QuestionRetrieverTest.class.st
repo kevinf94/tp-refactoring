@@ -111,8 +111,8 @@ QuestionRetrieverTest >> setUp [
 	user3 := User new.
 	user1 follow: user2; follow: user3.
 	
-	topicOO1 := Topic name: 'OO1' description: 'This topic is for discussing about OO1 issues'.
-	topicOO2 := Topic name: 'OO2' description: 'This topic is for discussing about OO2 issues'.	
+	topicOO1 := Topic withName: 'OO1' description: 'This topic is for discussing about OO1 issues'.
+	topicOO2 := Topic withName: 'OO2' description: 'This topic is for discussing about OO2 issues'.	
 	
 	user1 addTopic: topicOO1.
 	user2 addTopic: topicOO2.
