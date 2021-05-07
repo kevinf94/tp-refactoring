@@ -15,12 +15,8 @@ Class {
 }
 
 { #category : #'instance-creation' }
-User class >> username: aUsername password: aPassword questionRetriever: aQuestionRetriever [
-	^ self new
-		username: aUsername;
-		password: aPassword;
-		questionRetriever: aQuestionRetriever;
-		yourself
+User class >> withName: aUsernameString password: aPasswordString questionRetriever: aQuestionRetriever [
+	^ self new withName: aUsernameString password: aPasswordString questionRetriever: aQuestionRetriever; yourself
 ]
 
 { #category : #accessing }
@@ -58,12 +54,9 @@ User >> following [
 	^ following
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 User >> followingQuestions [
-| followingCol |
-	followingCol := OrderedCollection new.
-	following do:[ :follow | followingCol addAll: follow questions ].
-	^followingCol.
+	^ following flatCollect: [ :aUser | aUser questions ]
 ]
 
 { #category : #initialize }
@@ -75,12 +68,9 @@ User >> initialize [
 	votes := OrderedCollection new.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 User >> interestedTopicsQuestions [
- | topicsCol |
-	topicsCol := OrderedCollection new.
-	topics do:[ :topic | topicsCol addAll: topic questions ].
-	^topicsCol .
+	^ topics flatCollect: [ :aTopic | aTopic questions ]
 ]
 
 { #category : #accessing }
@@ -88,7 +78,7 @@ User >> password [
 	^ password
 ]
 
-{ #category : #private }
+{ #category : #deprecated }
 User >> password: anObject [
 	password := anObject
 ]
@@ -98,7 +88,7 @@ User >> questionRetriever [
 	^ questionRetriever
 ]
 
-{ #category : #private }
+{ #category : #deprecated }
 User >> questionRetriever: aQuestionRetriever [
 	questionRetriever := aQuestionRetriever.
 ]
@@ -123,7 +113,7 @@ User >> username [
 	^ username
 ]
 
-{ #category : #private }
+{ #category : #deprecated }
 User >> username: anObject [
 	username := anObject
 ]
@@ -131,4 +121,13 @@ User >> username: anObject [
 { #category : #accessing }
 User >> votes [
 	^ votes
+]
+
+{ #category : #private }
+User >> withName: aUsernameString password: aPasswordString questionRetriever: aQuestionRetriever [
+	username := aUsernameString.
+	password := aPasswordString.
+	questionRetriever := aQuestionRetriever.
+	
+
 ]

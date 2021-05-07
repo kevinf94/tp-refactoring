@@ -30,6 +30,11 @@ CuOOra >> addUser: aUser [
 	users add: aUser
 ]
 
+{ #category : #private }
+CuOOra >> avarageVotes [
+	^self totalQuestionsPositiveVotes / self todayQuestions size
+]
+
 { #category : #initialize }
 CuOOra >> initialize [
 	users := OrderedCollection new.
@@ -37,13 +42,9 @@ CuOOra >> initialize [
 	questions := OrderedCollection new
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 CuOOra >> popularQuestions [
-|popularTCol averageVotes |
-  popularTCol := OrderedCollection new.
-  popularTCol := self todayQuestions.
-  averageVotes := (questions sum: [:q | q positiveVotes size ]) / popularTCol size.
-  ^popularTCol select:[:q | q positiveVotes size >= averageVotes ]
+	^self todayQuestions select: [ :aQuestion | aQuestion positiveVotes size >= self avarageVotes ]
 ]
 
 { #category : #accessing }
@@ -51,17 +52,20 @@ CuOOra >> questions [
 	^ questions
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 CuOOra >> todayQuestions [
-| newsCol |
-	newsCol := OrderedCollection new.
-	questions do:[:q | (q timestamp asDate = Date today) ifTrue: [newsCol add: q]].
-	^newsCol .
+	^questions select: [ :aQuestion | aQuestion timestamp asDate = Date today ].
+
 ]
 
 { #category : #accessing }
 CuOOra >> topics [
 	^ topics
+]
+
+{ #category : #private }
+CuOOra >> totalQuestionsPositiveVotes [
+	^questions sum: [ :aQuestion | aQuestion positiveVotes size ]
 ]
 
 { #category : #accessing }
