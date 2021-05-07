@@ -92,6 +92,11 @@ User >> questions [
 	^ questions
 ]
 
+{ #category : #'as yet unclassified' }
+User >> questionsFromTopics [
+	^topics flatCollect: [ :aTopic | aTopic questions ]
+]
+
 { #category : #accessing }
 User >> questionsOfInterest [
 	^ questionRetriever retrieveQuestions: self.

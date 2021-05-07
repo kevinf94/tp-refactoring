@@ -4,18 +4,23 @@ Class {
 	#category : #'TP-Refactoring-Model'
 }
 
+{ #category : #'as yet unclassified' }
+PopularTodayQuestionRetriever >> avarageVotes [
+	^self totalPositiveVotes / cuoora todayQuestinos size
+]
+
+{ #category : #'as yet unclassified' }
+PopularTodayQuestionRetriever >> popularQuestionsOverAvarage: anInteger [
+	^cuoora todayQuestinos select: [ :q | q positiveVotes size >= anInteger ]
+]
+
 { #category : #retrieving }
 PopularTodayQuestionRetriever >> retrieveQuestions: aUser [
-	| qRet  temp popularTCol averageVotes |
-	qRet := OrderedCollection new.
+	^self retrieveQuestions: aUser onQuestions: (self popularQuestionsOverAvarage: self avarageVotes)
 	
-	popularTCol := OrderedCollection new.
-	cuoora questions do: [ :q |  q timestamp asDate = Date today ifTrue: [ popularTCol add: q ] ].
-	averageVotes := (cuoora questions sum: [ :q | q positiveVotes size ]) / popularTCol size.
-	temp := (popularTCol
-		select: [ :q | q positiveVotes size >= averageVotes ])
-		asSortedCollection: [ :a :b | a positiveVotes size > b positiveVotes size ].
-	qRet := temp last: (100 min: temp size).
-	
-	^ qRet reject: [ :q | q user = aUser ]
+]
+
+{ #category : #private }
+PopularTodayQuestionRetriever >> totalPositiveVotes [
+	^cuoora questions sum: [ :q | q positiveVotes size ]
 ]

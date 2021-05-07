@@ -24,7 +24,7 @@ Topic >> description [
 	^ description
 ]
 
-{ #category : #private }
+{ #category : #deprecated }
 Topic >> description: aDescriptionString [
 	description := aDescriptionString
 ]
@@ -39,7 +39,7 @@ Topic >> name [
 	^name
 ]
 
-{ #category : #private }
+{ #category : #deprecated }
 Topic >> name: aNameString [
 	name := aNameString
 ]

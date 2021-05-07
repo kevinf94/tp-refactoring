@@ -20,6 +20,11 @@ Publication >> description [
 	^ description
 ]
 
+{ #category : #deprecated }
+Publication >> description: anObject [
+	description := anObject.
+]
+
 { #category : #initialization }
 Publication >> initialize [
 	votes := OrderedCollection new.
@@ -41,9 +46,19 @@ Publication >> timestamp [
 	^ timestamp
 ]
 
+{ #category : #deprecated }
+Publication >> timestamp: anObject [
+	timestamp := anObject
+]
+
 { #category : #accessing }
 Publication >> user [
 	^ user
+]
+
+{ #category : #deprecated }
+Publication >> user: anObject [
+	user := anObject.
 ]
 
 { #category : #accessing }

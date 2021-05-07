@@ -38,6 +38,11 @@ Question >> title [
 	^title 
 ]
 
+{ #category : #deprecated }
+Question >> title: aTitle [
+	title := aTitle.
+]
+
 { #category : #accessing }
 Question >> topics [
 	^topics 

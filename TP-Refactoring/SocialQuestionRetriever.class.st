@@ -4,15 +4,14 @@ Class {
 	#category : #'TP-Refactoring-Model'
 }
 
+{ #category : #private }
+SocialQuestionRetriever >> followingQuestionsOfUser: aUser [
+	^aUser following flatCollect: [ :follow | follow questions ]
+]
+
 { #category : #retrieving }
 SocialQuestionRetriever >> retrieveQuestions: aUser [
-	| qRet followingCol temp |
-	qRet := OrderedCollection new.
+	^self retrieveQuestions: aUser onQuestions: (self followingQuestionsOfUser: aUser).
 	
-	followingCol := OrderedCollection new.
-	aUser following do: [ :follow | followingCol addAll: follow questions ].
-	temp := followingCol asSortedCollection: [ :a :b | a positiveVotes size > b positiveVotes size ].
-	qRet := temp last: (100 min: temp size).
-	
-	^ qRet reject: [ :q | q user = aUser ]
+
 ]

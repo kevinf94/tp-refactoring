@@ -23,6 +23,11 @@ Answer >> isTopAnswer [
 	^ self positiveVotes >=  ((question sum: [:answer | answer positiveVotes size ]) / question answer size )
 ]
 
+{ #category : #deprecated }
+Answer >> question: aQuestion [
+	question := aQuestion.
+]
+
 { #category : #private }
 Answer >> withDescription: aDescriptionString user: aUser question: aQuestion [
 	self withDescription: aDescriptionString user: aUser.

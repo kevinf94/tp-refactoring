@@ -42,6 +42,11 @@ CuOOra >> questions [
 	^ questions
 ]
 
+{ #category : #'as yet unclassified' }
+CuOOra >> todayQuestinos [
+	^questions select: [ :aQuestion | aQuestion timestamp asDate = Date today ]
+]
+
 { #category : #accessing }
 CuOOra >> topics [
 	^ topics
