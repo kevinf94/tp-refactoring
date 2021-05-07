@@ -58,6 +58,14 @@ User >> following [
 	^ following
 ]
 
+{ #category : #'as yet unclassified' }
+User >> followingQuestions [
+| followingCol |
+	followingCol := OrderedCollection new.
+	following do:[ :follow | followingCol addAll: follow questions ].
+	^followingCol.
+]
+
 { #category : #initialize }
 User >> initialize [
 	questions := OrderedCollection new.  
@@ -65,6 +73,14 @@ User >> initialize [
 	topics := OrderedCollection new. 
 	following := OrderedCollection new. 
 	votes := OrderedCollection new.
+]
+
+{ #category : #'as yet unclassified' }
+User >> interestedTopicsQuestions [
+ | topicsCol |
+	topicsCol := OrderedCollection new.
+	topics do:[ :topic | topicsCol addAll: topic questions ].
+	^topicsCol .
 ]
 
 { #category : #accessing }
@@ -90,11 +106,6 @@ User >> questionRetriever: aQuestionRetriever [
 { #category : #accessing }
 User >> questions [
 	^ questions
-]
-
-{ #category : #'as yet unclassified' }
-User >> questionsFromTopics [
-	^topics flatCollect: [ :aTopic | aTopic questions ]
 ]
 
 { #category : #accessing }

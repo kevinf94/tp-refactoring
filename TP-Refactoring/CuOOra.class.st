@@ -37,14 +37,26 @@ CuOOra >> initialize [
 	questions := OrderedCollection new
 ]
 
+{ #category : #'as yet unclassified' }
+CuOOra >> popularQuestions [
+|popularTCol averageVotes |
+  popularTCol := OrderedCollection new.
+  popularTCol := self todayQuestions.
+  averageVotes := (questions sum: [:q | q positiveVotes size ]) / popularTCol size.
+  ^popularTCol select:[:q | q positiveVotes size >= averageVotes ]
+]
+
 { #category : #accessing }
 CuOOra >> questions [
 	^ questions
 ]
 
 { #category : #'as yet unclassified' }
-CuOOra >> todayQuestinos [
-	^questions select: [ :aQuestion | aQuestion timestamp asDate = Date today ]
+CuOOra >> todayQuestions [
+| newsCol |
+	newsCol := OrderedCollection new.
+	questions do:[:q | (q timestamp asDate = Date today) ifTrue: [newsCol add: q]].
+	^newsCol .
 ]
 
 { #category : #accessing }

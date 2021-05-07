@@ -9,16 +9,16 @@ Class {
 }
 
 { #category : #'instance creation' }
-QuestionRetriever class >> withCuOOra: aCuoora [
-	^ self new withCuOOra: aCuoora
+QuestionRetriever class >> new: aCuoora [
+	^ self new cuoora: aCuoora
 ]
 
 { #category : #'instance creation' }
-QuestionRetriever class >> withCuOOra: aCuoora and: aSymbol [
-	^ self new withCuOOra: aCuoora and: aSymbol; yourself.
+QuestionRetriever class >> new: aCuoora and: aSymbol [
+	^ self new cuoora: aCuoora; option: aSymbol; yourself.
 ]
 
-{ #category : #deprecated }
+{ #category : #accessing }
 QuestionRetriever >> cuoora: aCuooraInstance [
 	cuoora := aCuooraInstance 
 ]
@@ -28,45 +28,40 @@ QuestionRetriever >> initialize [
 	option := #social
 ]
 
-{ #category : #private }
-QuestionRetriever >> last100Questions: aQuestionCollection [
-	^aQuestionCollection last: (100 min: aQuestionCollection size)
+{ #category : #accessing }
+QuestionRetriever >> lastQuestions: aQuestions [
+ ^ aQuestions last: (100 min: aQuestions size)
 ]
 
-{ #category : #deprecated }
+{ #category : #accessing }
 QuestionRetriever >> option: anOption [
 	option := anOption
 ]
 
 { #category : #private }
-QuestionRetriever >> removeQuestionsFromUser: aUser inCollection: aQuestionCollection [ 
-	^aQuestionCollection reject: [  :aQuestion | aQuestion user = aUser ]
-	
-]
-
-{ #category : #private }
 QuestionRetriever >> retrieveQuestions: aUser [
-	^self subclassResponsibility
+	| qRet |
+	qRet := OrderedCollection new.
+	option = #social
+		ifTrue: [ 
+			qRet := self lastQuestions: (self sortQuestionsByPositiveVotes: aUser followingQuestions). 
+			].
+	option = #topics
+		ifTrue: [
+			qRet := self lastQuestions: (self sortQuestionsByPositiveVotes: aUser interestedTopicsQuestions) .
+			 ].
+	option = #news
+		ifTrue: [
+			qRet := self lastQuestions: (self sortQuestionsByPositiveVotes: cuoora todayQuestions).
+			 ].
+	option = #popularToday
+		ifTrue: [
+			qRet := self lastQuestions: (self sortQuestionsByPositiveVotes: cuoora popularQuestions). 
+			 ].
+	^ qRet reject: [ :q | q user = aUser ]
 ]
 
-{ #category : #private }
-QuestionRetriever >> retrieveQuestions: aUser onQuestions: aQuestionCollection [
-	^self removeQuestionsFromUser: aUser inCollection: (self last100Questions: (self sortQuestions: aQuestionCollection))
-
-]
-
-{ #category : #private }
-QuestionRetriever >> sortQuestions: aQuestionCollection [
-	^aQuestionCollection asSortedCollection: [ :a :b | a positiveVotes size > b positiveVotes size ]
-]
-
-{ #category : #private }
-QuestionRetriever >> withCuOOra: aCuoora [
-	cuoora := aCuoora
-]
-
-{ #category : #private }
-QuestionRetriever >> withCuOOra: aCuoora and: aSymbol [
-	cuoora := aCuoora.
-	option := aSymbol.
+{ #category : #sorting }
+QuestionRetriever >> sortQuestionsByPositiveVotes: aCollectionOfQuestions [
+  ^aCollectionOfQuestions asSortedCollection: [ :a :b | a positiveVotes size > b positiveVotes size ].
 ]
