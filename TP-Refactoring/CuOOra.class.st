@@ -17,7 +17,7 @@ CuOOra >> addQuestion: aQuestion [
 { #category : #adding }
 CuOOra >> addQuestion: aQuestion forUser: aUser [
 	aUser addQuestion: aQuestion.
-	questions add: aQuestion.
+	self addQuestion: aQuestion.
 ]
 
 { #category : #adding }

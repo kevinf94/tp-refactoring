@@ -24,7 +24,7 @@ Class {
 QuestionRetrieverTest >> popularTodayAtLeastOneVote [
 
 	"1 likes / 2 preguntas // preguntas con al menos 1 voto"
-	questionUser2TopicOO2 addVote: (Vote user: user3 likesPublication: questionUser2TopicOO2).
+	questionUser2TopicOO2 addVote: (Vote withUser: user3 likesPublication: questionUser2TopicOO2).
 	self assert: (popularTodayRetriever retrieveQuestions: user1) size equals: 1.
 	self assert: (popularTodayRetriever retrieveQuestions: user2) size equals: 0.
 	self assert: (popularTodayRetriever retrieveQuestions: user3) size equals: 1
@@ -33,12 +33,12 @@ QuestionRetrieverTest >> popularTodayAtLeastOneVote [
 { #category : #testing }
 QuestionRetrieverTest >> popularTodayFiveLikesFourQuestionsAtLeastOneVote [
 	"5 likes / 4 preguntas // preguntas con mas de 1 voto"
-	question2User3TopicOO2 addVote: (Vote user: User new likesPublication: question2User3TopicOO2).
+	question2User3TopicOO2 addVote: (Vote withUser: User new likesPublication: question2User3TopicOO2).
 	self assert: (popularTodayRetriever retrieveQuestions: user1) size equals: 1.
 	self assert: (popularTodayRetriever retrieveQuestions: user1) first equals: question2User3TopicOO2.
 	self assert: (popularTodayRetriever retrieveQuestions: user2) size equals: 1.
 	self assert: (popularTodayRetriever retrieveQuestions: user3) size equals: 0.
-	15 timesRepeat: [ questionUser1TopicOO1 addVote: (Vote user: User new likesPublication: questionUser1TopicOO1) ].
+	15 timesRepeat: [ questionUser1TopicOO1 addVote: (Vote withUser: User new likesPublication: questionUser1TopicOO1) ].
 	self assert: (popularTodayRetriever retrieveQuestions: user1) size equals: 0.
 	self assert: (popularTodayRetriever retrieveQuestions: user2) size equals: 1.
 	self assert: (popularTodayRetriever retrieveQuestions: user2) first equals: questionUser1TopicOO1.
@@ -49,8 +49,8 @@ QuestionRetrieverTest >> popularTodayFiveLikesFourQuestionsAtLeastOneVote [
 { #category : #testing }
 QuestionRetrieverTest >> popularTodayFourLikesFourQuestionsAtLeastOneVote [
 	"4 likes / 4 preguntas // preguntas con al menos 1 voto"
-	question2User3TopicOO2 addVote: (Vote user: user1 likesPublication: question2User3TopicOO2).
-	question2User3TopicOO2 addVote: (Vote user: User new likesPublication: question2User3TopicOO2).
+	question2User3TopicOO2 addVote: (Vote withUser: user1 likesPublication: question2User3TopicOO2).
+	question2User3TopicOO2 addVote: (Vote withUser: User new likesPublication: question2User3TopicOO2).
 	self assert: (popularTodayRetriever retrieveQuestions: user1) size equals: 2.
 	self assert: (popularTodayRetriever retrieveQuestions: user2) size equals: 1.
 	self assert: (popularTodayRetriever retrieveQuestions: user3) size equals: 1.
@@ -98,7 +98,7 @@ QuestionRetrieverTest >> popularTodayNoLikesTwoQuestions [
 { #category : #testing }
 QuestionRetrieverTest >> popularTodayTwoLikesFourQuestionsAtLeastOneVote [
 	"2 likes / 4 preguntas // preguntas con al menos 1 voto"
-	question2User3TopicOO2 addVote: (Vote user: user2 likesPublication: question2User3TopicOO2).
+	question2User3TopicOO2 addVote: (Vote withUser: user2 likesPublication: question2User3TopicOO2).
 	self assert: (popularTodayRetriever retrieveQuestions: user1) size equals: 2.
 	self assert: (popularTodayRetriever retrieveQuestions: user2) size equals: 1.
 	self assert: (popularTodayRetriever retrieveQuestions: user3) size equals: 1.
@@ -177,7 +177,7 @@ QuestionRetrieverTest >> testSocialRetrieveQuestions [
 	self assert: (socialRetriever retrieveQuestions: user3) size equals: 0.
 	
 	questionUser2TopicOO2 := Question withTitle: 'Which bad smell...?' description: '' user: user2 topic: topicOO2.
-	questionUser2TopicOO2 addVote: (Vote user: user2 dislikesPublication: questionUser2TopicOO2).
+	questionUser2TopicOO2 addVote: (Vote withUser: user2 dislikesPublication: questionUser2TopicOO2).
 	cuoora addQuestion: questionUser2TopicOO2 forUser:user2.
 	
 	self assert: (socialRetriever retrieveQuestions: user1) size equals: 2.

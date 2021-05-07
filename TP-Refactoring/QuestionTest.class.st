@@ -14,20 +14,20 @@ QuestionTest >> setUp [
 
 { #category : #testing }
 QuestionTest >> testNegativeVotes [		
-	question addVote: (Vote user: (User new) dislikesPublication: question).
+	question addVote: (Vote withUser: (User new) dislikesPublication: question).
 	self assert: (question negativeVotes size) equals: 1.
 	
-	question addVote: (Vote user: (User new) dislikesPublication: question).
+	question addVote: (Vote withUser: (User new) dislikesPublication: question).
 	self assert: (question negativeVotes size) equals: 2.
 ]
 
 { #category : #testing }
 QuestionTest >> testPositiveAndNegativeVotesInterference [	
-	question addVote: (Vote user: (User new) dislikesPublication: question).
+	question addVote: (Vote withUser: (User new) dislikesPublication: question).
 	self assert: (question positiveVotes size) equals: 0.
 	self assert: (question negativeVotes size) equals: 1.
 	
-	question addVote: (Vote user: (User new) likesPublication: question).	
+	question addVote: (Vote withUser: (User new) likesPublication: question).	
 	self assert: (question positiveVotes size) equals: 1.
 	self assert: (question negativeVotes size) equals: 1.
 	
@@ -36,10 +36,10 @@ QuestionTest >> testPositiveAndNegativeVotesInterference [
 
 { #category : #testing }
 QuestionTest >> testPositiveVotes [
-	question addVote: (Vote user: (User new) likesPublication: question).	
+	question addVote: (Vote withUser: (User new) likesPublication: question).	
 	self assert: (question positiveVotes size) equals: 1.
 	
-	question addVote: (Vote user: (User new) likesPublication: question).	
+	question addVote: (Vote withUser: (User new) likesPublication: question).	
 	self assert: (question positiveVotes size) equals: 2.
 
 ]

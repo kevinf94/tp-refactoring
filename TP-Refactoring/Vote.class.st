@@ -11,21 +11,14 @@ Class {
 }
 
 { #category : #'instance creation' }
-Vote class >> user: aUser dislikesPublication: aPublication [
-	^ self new
-		user: aUser;
-		publication: aPublication;
-		dislike;
-		yourself
+Vote class >> withUser: aUser dislikesPublication: aPublication [
+	^ self new withUser: aUser isLike: false publication: aPublication; yourself
 		
 ]
 
 { #category : #'instance creation' }
-Vote class >> user: aUser likesPublication: aPublication [
-	^ self new
-		user: aUser;
-		publication: aPublication;
-		yourself
+Vote class >> withUser: aUser likesPublication: aPublication [
+	^ self new withUser: aUser isLike: true publication: aPublication; yourself
 ]
 
 { #category : #private }
@@ -54,7 +47,7 @@ Vote >> publication [
 	^ publication
 ]
 
-{ #category : #private }
+{ #category : #deprecated }
 Vote >> publication: anObject [
 	publication := anObject
 ]
@@ -64,7 +57,14 @@ Vote >> user [
 	^ user
 ]
 
-{ #category : #private }
+{ #category : #deprecated }
 Vote >> user: anObject [
 	user := anObject
+]
+
+{ #category : #private }
+Vote >> withUser: aUser isLike: aBoolean publication: aPublication [
+	user := aUser.
+	isLike := aBoolean.
+	publication := aPublication.
 ]
