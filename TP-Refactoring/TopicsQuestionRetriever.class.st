@@ -4,7 +4,7 @@ Class {
 	#category : #'TP-Refactoring-Model'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 TopicsQuestionRetriever >> typeOfQuestions: aUser [
 	
 	^ aUser interestedTopicsQuestions

@@ -17,19 +17,19 @@ QuestionRetriever >> cuoora: aCuooraInstance [
 	cuoora := aCuooraInstance 
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 QuestionRetriever >> lastQuestions: aQuestions [
  ^ aQuestions last: (100 min: aQuestions size)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 QuestionRetriever >> retrieveLastSortedQuestionsWithoutMe: aUser [
 
 	^(self lastQuestions: (self sortQuestionsByPositiveVotes: (self typeOfQuestions: aUser)))
 				reject: [ :q | q user = aUser ]
 ]
 
-{ #category : #private }
+{ #category : #accessing }
 QuestionRetriever >> retrieveQuestions: aUser [
 	^ self retrieveLastSortedQuestionsWithoutMe: aUser
 ]
