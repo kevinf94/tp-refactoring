@@ -41,27 +41,19 @@ QuestionRetriever >> option: anOption [
 { #category : #private }
 QuestionRetriever >> retrieveQuestions: aUser [
 	| qRet |
-	qRet := OrderedCollection new.
-	option = #social
-		ifTrue: [ 
-			qRet := self lastQuestions: (self sortQuestionsByPositiveVotes: aUser followingQuestions). 
-			].
-	option = #topics
-		ifTrue: [
-			qRet := self lastQuestions: (self sortQuestionsByPositiveVotes: aUser interestedTopicsQuestions) .
-			 ].
-	option = #news
-		ifTrue: [
-			qRet := self lastQuestions: (self sortQuestionsByPositiveVotes: cuoora todayQuestions).
-			 ].
-	option = #popularToday
-		ifTrue: [
-			qRet := self lastQuestions: (self sortQuestionsByPositiveVotes: cuoora popularQuestions). 
-			 ].
-	^ qRet reject: [ :q | q user = aUser ]
+	 qRet := OrderedCollection new.
+	
+	 qRet := self lastQuestions: (self sortQuestionsByPositiveVotes: (self typeOfQuestions: aUser)). 
+	
+  ^ qRet reject: [ :q | q user = aUser ]
 ]
 
 { #category : #sorting }
 QuestionRetriever >> sortQuestionsByPositiveVotes: aCollectionOfQuestions [
   ^aCollectionOfQuestions asSortedCollection: [ :a :b | a positiveVotes size > b positiveVotes size ].
+]
+
+{ #category : #abstract }
+QuestionRetriever >> typeOfQuestions: aUser [
+	self subclassResponsibility .
 ]
