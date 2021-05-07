@@ -2,7 +2,6 @@ Class {
 	#name : #QuestionRetriever,
 	#superclass : #Object,
 	#instVars : [
-		'option',
 		'cuoora'
 	],
 	#category : #'TP-Refactoring-Model'
@@ -13,19 +12,9 @@ QuestionRetriever class >> new: aCuoora [
 	^ self new cuoora: aCuoora
 ]
 
-{ #category : #'instance creation' }
-QuestionRetriever class >> new: aCuoora and: aSymbol [
-	^ self new cuoora: aCuoora; option: aSymbol; yourself.
-]
-
 { #category : #accessing }
 QuestionRetriever >> cuoora: aCuooraInstance [
 	cuoora := aCuooraInstance 
-]
-
-{ #category : #initializing }
-QuestionRetriever >> initialize [
-	option := #social
 ]
 
 { #category : #accessing }
@@ -33,19 +22,16 @@ QuestionRetriever >> lastQuestions: aQuestions [
  ^ aQuestions last: (100 min: aQuestions size)
 ]
 
-{ #category : #accessing }
-QuestionRetriever >> option: anOption [
-	option := anOption
+{ #category : #'as yet unclassified' }
+QuestionRetriever >> retrieveLastSortedQuestionsWithoutMe: aUser [
+
+	^(self lastQuestions: (self sortQuestionsByPositiveVotes: (self typeOfQuestions: aUser)))
+				reject: [ :q | q user = aUser ]
 ]
 
 { #category : #private }
 QuestionRetriever >> retrieveQuestions: aUser [
-	| qRet |
-	 qRet := OrderedCollection new.
-	
-	 qRet := self lastQuestions: (self sortQuestionsByPositiveVotes: (self typeOfQuestions: aUser)). 
-	
-  ^ qRet reject: [ :q | q user = aUser ]
+	^ self retrieveLastSortedQuestionsWithoutMe: aUser
 ]
 
 { #category : #sorting }
