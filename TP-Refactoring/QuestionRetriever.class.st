@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #'instance creation' }
-QuestionRetriever class >> new: aCuoora [
+QuestionRetriever class >> withCuoora: aCuoora [
 	^ self new cuoora: aCuoora
 ]
 
